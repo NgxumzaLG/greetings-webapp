@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting</title>
+    <link rel="stylesheet" href="./css/greet.css">
+
+</head>
+<body>
+    <header class="header">
+        <div class="container greet-header">
+            <h1>GREETING</h1>
+        </div>
+        
+    </header>
+
+    <section class="showcase">
+        <div class="container greet-body">
+            <form action="action" method="POST">
+                <div class="name-textbox">
+                    Name:
+                    <input type="text" name="userName" value="" placeholder="enter a name" class="nameText">
+                </div>
+
+                <div class="count">
+                    <h2>counter :</h2>
+                    <span class="counter">{{countNames}}</span>
+                </div>
+                
+                <div class="radio-btn">
+                    <input type="radio" class="radio-lang" id="radio-lang1" name="language" value="english">English
+                    <input type="radio" class="radio-lang" id="radio-lang2" name="language" value="afrikaans">Afrikaans
+                    <input type="radio" class="radio-lang" id="radio-lang3" name="language" value="isixhosa">isiXhosa
+                </div>
+
+                <div class="greet-btn">
+                    <button class="greetBtn" on type="submit" name="button">Greet Me</button>
+                    <button class="refreshBtn" on type="submit" name="button">Reset</button>
+                </div>
+
+            </form>
+            
+
+            <div class="greet-message">
+                <h4 class="{{color}}">{{greetUser}}</h4>
+                <!-- Greet Me -->
+            </div>
+
+            <!-- <div class="test"></div> -->
+            
+        </div>
+    </section>
+    
+</body>
+</html>

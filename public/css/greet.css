@@ -1,0 +1,168 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);
+
+/* UNIVERSAL.. */
+
+* {
+    font-family: 'Lato', Helvetica, sans-serif;
+    color: #333447;
+    line-height: 1.5;
+}
+
+body {
+    background-color: rgb(243, 159, 3, 0.2);
+    padding: 0;   
+    margin: 0;
+}
+
+input {
+    padding: 5px;
+    height: 25px;
+}
+
+
+/* UTILITIES */
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+/* HEADER... */
+
+.header {
+    border-bottom: 0.3px solid blue;
+}
+
+.greet-header {
+    width: 100px;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
+
+/* SHOWCASE... */
+
+.showcase {
+    height: calc (100vh - 100px);
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    padding: 15px;
+}
+
+.name-textbox {
+    font-size: 25px;
+    margin: 10px;
+}
+
+.nameText {
+    margin: 5px;
+    font-size: 18px;
+}
+
+/* .radio-btn label {
+    font-size: 20px;
+} */
+
+.radio-btn {
+    display: inline-flex;
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.radio-lang {
+    margin: 5px 10px 10px 25px;
+}
+
+.container .greet-body {
+    justify-content: center;
+}
+
+.greet-message {
+    width: auto;
+    height: 55px;
+    background-color: rgb(85, 180, 235);
+    font-weight: bold;
+    padding: 20px;
+    margin: 9px;
+    justify-content: center;
+    align-content: center;
+    color:white;
+    text-align: center;
+}
+
+.greet-message h4 {
+    font-size: 25px;
+    margin: 10px;
+
+}
+
+.greetBtn, .refreshBtn{
+    width: 120px;
+    height: auto;
+    padding: 5px;
+    margin: 5px;
+    font-size: large;
+    font-weight: bold;
+    border:2px solid blue;
+    border-radius: 5px;
+    background-color: transparent;
+}
+.greetBtn:hover, .refreshBtn:hover, .unitTestingBtn:hover {
+    transform: scale(1.1);
+}
+
+.counter {
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.count {
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+}
+
+/* CLASSLIST... */
+
+.error {
+    color: crimson;
+    font-weight: bold;
+} 
+
+.proceed {
+    color: white;
+    font-weight: bold;
+}
+
+/* MEDIA QUERY... */
+
+@media screen and (max-width: 470px) {
+
+    .nameText {
+        margin: 5px 0;
+    }
+    .greet-body .radio-btn {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .radio-lang {
+        margin: 5px;
+    }
+
+    .radio-btn {
+        /* margin: 10px; */
+        text-align: left;
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    .greet-message {
+        min-height: 55px;
+        height: auto;
+    }
+    
+}
