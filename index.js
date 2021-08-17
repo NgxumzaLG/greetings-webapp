@@ -26,20 +26,28 @@ app.get("/", function(req, res){
     res.render("index", {
         greetUser: greetings.getMessage(),
         countNames: greetings.getCounter(),
-        color: greetings.addAlertClass()
+        color: greetings.addAlertClass(),
+        
     });
 });
 
 app.post('/action', function(req, res) {
-
     greetings.greetMe(req.body.userName, req.body.language);
 
     res.redirect('/');
 
 });
 
+app.get('/greeted', function(req, res) {
+    res.render('greeted', {
+        greetedNames: greetings.namesAdded()
+
+    });
+});
+
 let PORT = process.env.PORT || 3010;
 
 app.listen(PORT, function(){
     console.log('App starting on port', PORT);
+
 });

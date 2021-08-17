@@ -1,9 +1,7 @@
 
 module.exports = function greeting() {
-    // var theName = "";
-    var storeNames = {};
+    var storeNames = [];
     var strAlert = "";
-    var counter = 0;
     let strMessage = "";
     const RegExp = /^[A-Za-z]+$/;
 
@@ -29,13 +27,21 @@ module.exports = function greeting() {
 
                     strAlert = "proceed";
 
-                    if(!storeNames[theName]) {
-                        storeNames[theName] = 1;
-                        counter++;
-                        
+                    if (storeNames.length == 0) {
+                        storeNames.push({
+                            name: theName,
+                            greet: 1
+
+                        });
+
                     } else {
-                        storeNames[theName]++;
+                        if(!storeNames.some(storeNames => storeNames.name === theName)){
+                            storeNames.push({
+                                name: theName,
+                                greet: 1
     
+                            });
+                        }
                     }
 
                 } else {
@@ -79,7 +85,7 @@ module.exports = function greeting() {
     // }
 
     function getCounter(){
-        return Object.keys(storeNames).length;
+        return storeNames.length;
 
     }
 

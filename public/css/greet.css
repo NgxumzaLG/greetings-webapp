@@ -4,12 +4,12 @@
 
 * {
     font-family: 'Lato', Helvetica, sans-serif;
-    color: #333447;
     line-height: 1.5;
 }
 
 body {
     background-color: rgb(243, 159, 3, 0.2);
+    color: #333447;
     padding: 0;   
     margin: 0;
 }
@@ -61,10 +61,6 @@ input {
     font-size: 18px;
 }
 
-/* .radio-btn label {
-    font-size: 20px;
-} */
-
 .radio-btn {
     display: inline-flex;
     margin: 10px;
@@ -82,7 +78,7 @@ input {
 
 .greet-message {
     width: auto;
-    height: 55px;
+    min-height: 55px;
     background-color: rgb(85, 180, 235);
     font-weight: bold;
     padding: 20px;
@@ -110,7 +106,8 @@ input {
     border-radius: 5px;
     background-color: transparent;
 }
-.greetBtn:hover, .refreshBtn:hover, .unitTestingBtn:hover {
+
+.greetBtn:hover, .refreshBtn:hover {
     transform: scale(1.1);
 }
 
@@ -123,6 +120,11 @@ input {
     font-size: 18px;
     padding: 0;
     margin: 0;
+}
+
+.display-link h4{
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 
 /* CLASSLIST... */
@@ -165,4 +167,19 @@ input {
         height: auto;
     }
     
+}
+
+/* TEST */
+
+.test {
+    width: auto;
+    background-color: rgb(85, 180, 235);
+    font-weight: bold;
+    padding: 20px;
+    margin: 9px;
+}
+
+.test a {
+    font-size: 18px;
+    color: white;
 }
