@@ -30,7 +30,8 @@ module.exports = function greeting() {
                     if (storeNames.length == 0) {
                         storeNames.push({
                             name: theName,
-                            greet: 1
+                            greet: 1,
+                            username: theName
 
                         });
 
@@ -38,8 +39,16 @@ module.exports = function greeting() {
                         if(!storeNames.some(storeNames => storeNames.name === theName)){
                             storeNames.push({
                                 name: theName,
-                                greet: 1
+                                greet: 1,
+                                username: theName
     
+                            });
+                        }else {
+                            storeNames.forEach(element => {
+                                if(element.name === theName){
+                                    element.greet++
+                                    
+                                }
                             });
                         }
                     }
@@ -67,22 +76,23 @@ module.exports = function greeting() {
         return strMessage;
     }
 
-    // function addNames(name, lang) {
-    //     if(name !=="" && lang !== ""){
-    //         if (name.match(RegExp)) {
-    //             var strName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-    //             if(!storeNames[strName]) {
-    //                 storeNames[strName] = 1;
-    //                 counter++;
-                    
-    //             } else {
-    //                 storeNames[strName]++;
 
-    //             }
-    //         } 
-    //     }
+    function usernameFor(user) {
+        let userInfo;
+
+        storeNames.forEach(element => {
+            if(element.username === user){
+                userInfo = {
+                    name: element.name,
+                    greet: element.greet
+
+                };
+            }
+        });
+
+        return userInfo;
         
-    // }
+    }
 
     function getCounter(){
         return storeNames.length;
@@ -106,7 +116,7 @@ module.exports = function greeting() {
 
     return {
         greetMe,
-        // addNames,
+        usernameFor,
         getCounter,
         namesAdded,
         addAlertClass,

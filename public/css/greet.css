@@ -76,7 +76,7 @@ input {
     justify-content: center;
 }
 
-.greet-message {
+.greet-message, .summary {
     width: auto;
     min-height: 55px;
     background-color: rgb(85, 180, 235);
@@ -89,7 +89,7 @@ input {
     text-align: center;
 }
 
-.greet-message h4 {
+.greet-message h4, .summary h4{
     font-size: 25px;
     margin: 10px;
 
@@ -182,4 +182,8 @@ input {
 .test a {
     font-size: 18px;
     color: white;
+}
+
+.user-greeted {
+    text-align: center;
 }

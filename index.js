@@ -45,6 +45,15 @@ app.get('/greeted', function(req, res) {
     });
 });
 
+app.get('/summary/:username', function(req, res) {
+    const userSelected = req.params.username;
+
+    res.render('summary', {
+        userGreeted: greetings.usernameFor(userSelected)
+
+    });
+});
+
 let PORT = process.env.PORT || 3010;
 
 app.listen(PORT, function(){
