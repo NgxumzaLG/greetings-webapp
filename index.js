@@ -1,6 +1,8 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
+const flash = require('express-flash');
+const session = require('express-session');
 const greetFactory = require('./greet-factory');
 
 const app = express();
@@ -22,9 +24,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// initialise session middleware - flash-express depends on it
+app.use(session({
+    secret : "flash the mesaage",
+    resave: false,
+    saveUninitialized: true
+}));
+
+// initialise the flash middleware
+app.use(flash());
+
 app.get("/", function(req, res){
+    req.flash('greetUser' , greetings.getMessage());
+
     res.render("index", {
-        greetUser: greetings.getMessage(),
         countNames: greetings.getCounter(),
         color: greetings.addAlertClass(),
         
