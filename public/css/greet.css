@@ -184,6 +184,12 @@ input {
     color: white;
 }
 
-.user-greeted {
+.user-greeted, .names-greeted h4 {
     text-align: center;
 }
+
+.user-greeted h4 {
+    margin: 10px 10px 0 10px;
+}
+
+

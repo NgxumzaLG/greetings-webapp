@@ -1,13 +1,14 @@
-<div class="container">
+<div class="container names-greeted">
     <h2>Names Greeted</h2>
 
     <div class="test">
         <ul>
             {{#each greetedNames}}
-                <li><a href="/summary/{{username}}">{{name}}</a></li>
+                <li><a href="/summary/{{username}}">{{username}}</a></li>
 
             {{/each}}
 
         </ul>
     </div>
+    <h4><a href="/">Home</a></h4>
 </div>

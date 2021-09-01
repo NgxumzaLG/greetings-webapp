@@ -41,11 +41,17 @@
 
                 <div class="greet-btn">
                     <button class="greetBtn" on type="submit" name="button">Greet Me</button>
-                    <button class="refreshBtn" on type="submit" name="button">Reset</button>
-                </div>
 
+                </div>
             </form>
             
+            <form action="reset" method="POST">
+                <div class="reset-btn">
+                    <button class="refreshBtn" on type="submit" name="button">Reset</button>
+
+                </div>
+            </form>
+                   
             <div class="greet-message">
                 <h4 class="{{color}}">{{messages.greetUser}}</h4>
 
