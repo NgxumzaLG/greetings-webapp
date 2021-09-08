@@ -20,7 +20,7 @@ describe('Greetings webapp' , function(){
 
     describe('Greet the user' , function(){
         it('Should greet Lusanda in English.' , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('lusanDA', 'english')
 
@@ -28,7 +28,7 @@ describe('Greetings webapp' , function(){
         });
 
         it('Should greet Lusanda in Afrikaans.' , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('lusanda', 'afrikaans')
 
@@ -36,7 +36,7 @@ describe('Greetings webapp' , function(){
         });
 
         it('Should greet Lusanda in isiXhosa.' , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('LUSANDA', 'isixhosa')
 
@@ -46,15 +46,15 @@ describe('Greetings webapp' , function(){
 
     describe('Greet counter' , function(){
         it('Should increment the counter once a user has been greeted.' , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('lusanDA', 'english');
 
-            assert.deepEqual(1, greetExercise.getCounter());
+            assert.equal(1, await greetExercise.poolCounter());
         });
 
         it('Should increment the counter to 5, if 5 users have been greeted.' , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('lusanDA', 'english');
             await greetExercise.greetMe('sipho', 'isixhosa');
@@ -62,22 +62,48 @@ describe('Greetings webapp' , function(){
             await greetExercise.greetMe('lEBO', 'afrikaans');
             await greetExercise.greetMe('luyolO', 'isixhosa');
 
-            assert.deepEqual(5, greetExercise.getCounter());
+            assert.equal(5, await greetExercise.poolCounter());
         });
 
         it("Shouldn't increment the counter once a user has been greeted again." , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('lusanDA', 'english');
             await greetExercise.greetMe('lusANDa', 'isixhosa');
 
-            assert.deepEqual(1, greetExercise.getCounter());
+            assert.equal(1, await greetExercise.poolCounter());
+        });
+    });
+
+    describe('User Greeted' , function(){
+        it('Should return the list of names greeted.' , async function(){
+            let greetExercise = greeting(pool);
+
+            await greetExercise.greetMe('lusanDA', 'english');
+
+            assert.deepEqual([{ greet: 1, username: 'Lusanda' }], await greetExercise.poolGreet());
+
+            
+              
+        });
+
+        it('Should return the list of names greeted.' , async function(){
+            let greetExercise = greeting(pool);
+
+            await greetExercise.greetMe('lusanDA', 'english');
+            await greetExercise.greetMe('sipho', 'isixhosa');
+            await greetExercise.greetMe('luKHanyo', 'afrikaans');
+
+            assert.deepEqual([{ greet: 1, username: 'Lukhanyo' }, { greet: 1, username: 'Lusanda' }, { greet: 1, username: 'Sipho' }], await greetExercise.poolGreet());
+
+            
+              
         });
     });
 
     describe('Greet errors' , function(){
         it('Should return an error message if the name is not entered.' , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('', 'english')
 
@@ -85,7 +111,7 @@ describe('Greetings webapp' , function(){
         });
 
         it('Should return an error meessage if special charactered were entered.' , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('12345', 'afrikaans')
 
@@ -93,7 +119,7 @@ describe('Greetings webapp' , function(){
         });
 
         it('Should retrurn an error message if languege is not selected.' , async function(){
-            let greetExercise = greeting();
+            let greetExercise = greeting(pool);
 
             await greetExercise.greetMe('LUSANDA', '')
 

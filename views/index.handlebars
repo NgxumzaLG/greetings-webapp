@@ -35,29 +35,31 @@
                     <input type="radio" class="radio-lang" id="radio-lang3" name="language" value="isixhosa">isiXhosa
                 </div>
 
-                <div class="display-link">
-                    <h4><a href="/greeted">Greeted Names</a></h4>
-                </div>
-
                 <div class="greet-btn">
                     <button class="greetBtn" on type="submit" name="button">Greet Me</button>
 
-                </div>
+                
             </form>
             
-            <form action="reset" method="POST">
-                <div class="reset-btn">
-                    <button class="refreshBtn" on type="submit" name="button">Reset</button>
+                    <form action="reset" method="POST">
+                        {{!-- <div class="reset-btn"> --}}
+                            <button class="refreshBtn" on type="submit" name="button">Reset</button>
+
+                        
+                    </form>
+                </div>    
+
+
+                <div class="display-link">
+                        <h3><a href="/greeted">Greeted Names</a></h3>
+                    </div>
+                    
+                <div class="greet-message">
+                    <h4 class="{{color}}">{{messages.greetUser}}</h4>
+
+                    
 
                 </div>
-            </form>
-                   
-            <div class="greet-message">
-                <h4 class="{{color}}">{{messages.greetUser}}</h4>
-
-                
-
-            </div>
         </div>
     </section>
     

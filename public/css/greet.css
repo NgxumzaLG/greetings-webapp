@@ -111,6 +111,12 @@ input {
     transform: scale(1.1);
 }
 
+.greet-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .counter {
     font-size: 25px;
     font-weight: bolder;
@@ -122,8 +128,8 @@ input {
     margin: 0;
 }
 
-.display-link h4{
-    margin-top: 0;
+.display-link h3{
+    margin-top: 10px;
     margin-bottom: 15px;
 }
 
@@ -180,16 +186,15 @@ input {
 }
 
 .test a {
-    font-size: 18px;
+    font-size: 20px;
     color: white;
 }
 
-.user-greeted, .names-greeted h4 {
+.user-greeted, .names-greeted h3 {
     text-align: center;
 }
 
-.user-greeted h4 {
+.user-greeted h3 {
     margin: 10px 10px 0 10px;
 }
-
 
