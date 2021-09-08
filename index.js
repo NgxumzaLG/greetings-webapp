@@ -64,8 +64,8 @@ app.get("/", async function(req, res){
 });
 
 app.post('/action', async function(req, res) {
-    greetings.greetMe(req.body.userName, req.body.language);
-    await greetings.poolUsername(req.body.userName)
+    await greetings.greetMe(req.body.userName, req.body.language);
+//  greetings.poolUsername(req.body.userName)
 
     res.redirect('/');
 
