@@ -1,9 +1,20 @@
 
 module.exports = function greeting(database) {
-    var strAlert = "";
     let strMessage = "";
     const RegExp = /^[A-Za-z]+$/;
     const pool =  database
+
+    async function poolUsername(poolUser) {
+        const sql = await pool.query (`SELECT * FROM users WHERE username  = $1`, [poolUser]);
+
+        if (sql.rows.length == 0) {
+            await pool.query(`INSERT INTO users (username, greet) values ($1, $2)`, [poolUser, 1]);
+
+        } else {
+            await pool.query(`UPDATE users SET greet = greet + 1 WHERE username = $1`, [poolUser]);
+
+        }
+    }
 
     async function poolCounter() {
         const sqlCounter = await pool.query(`SELECT COUNT(*) FROM users`);
@@ -38,7 +49,7 @@ module.exports = function greeting(database) {
             if (strName !== "" ) {
                 if (strName.match(RegExp)) {
                     theName = strName.charAt(0).toUpperCase() + strName.slice(1).toLowerCase();
-    
+                    
                     if (lang === "english" || lang === "afrikaans" || lang === "isixhosa" ) {
                         if (lang === "english") {
                             strMessage = "Hello, " + theName;
@@ -50,35 +61,21 @@ module.exports = function greeting(database) {
                             strMessage = "Molo, " + theName;
                 
                         }
-
-                        const sql = await pool.query (`SELECT * FROM users WHERE username  = $1`, [theName]);
-
-                        if (sql.rows.length == 0) {
-                            await pool.query(`INSERT INTO users (username, greet) values ($1, $2)`, [theName, 1]);
-
-                        } else {
-                            await pool.query(`UPDATE users SET greet = greet + 1 WHERE username = $1`, [theName]);
-
-                        }
-    
-                        strAlert = "proceed";
+                        poolUsername(theName)
     
                     } else {
                         strMessage = "Error! language not selected";
-                        strAlert = "error";
-    
+
                     }
     
                 } else {
                     strMessage = "Error! special characters entered";
-                    strAlert = "error";
     
                 }
     
             } else {
                 strMessage = "Error! name not entered";
-                strAlert = "error";
-    
+
             }
             
         }
@@ -96,7 +93,10 @@ module.exports = function greeting(database) {
     }
 
     function addAlertClass() {
-        if (strAlert === "error") {
+        if (strMessage === "Error! name not entered" ||
+            strMessage === "Error! special characters entered" || 
+            strMessage === "Error! language not selected") {
+
             return "error";
 
         } else {
@@ -109,6 +109,7 @@ module.exports = function greeting(database) {
         greetMe,
         addAlertClass,
         getMessage,
+        poolUsername,
         poolCounter,
         poolGreet,
         poolUserGreeted,

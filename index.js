@@ -7,6 +7,7 @@ const {Pool} = require("pg");
 
 
 const greetFactory = require('./greet-factory');
+const greetRoutes = require('./routes/greet-routes')
 
 // should we use a SSL connection
 let useSSL = false;
@@ -26,6 +27,7 @@ const pool = new Pool({
 
 const app = express();
 let greetings = greetFactory(pool);
+let routeGreetings = greetRoutes(greetings);
 
 const handlebarSetup = exphbs({
     partialsDir: "./views/partials",
@@ -53,48 +55,15 @@ app.use(session({
 // initialise the flash middleware
 app.use(flash());
 
-app.get("/", async function(req, res){
-    req.flash('greetUser' , greetings.getMessage());
+app.get("/", routeGreetings.defualtRoute);
 
-    res.render("index", {
-        countNames: await greetings.poolCounter(),
-        color: greetings.addAlertClass(),
-        
-    });
-});
+app.post('/action', routeGreetings.actionRoute);
 
-app.post('/action', async function(req, res) {
-    await greetings.greetMe(req.body.userName, req.body.language);
-//  greetings.poolUsername(req.body.userName)
+app.get('/greeted', routeGreetings.greetedRoute);
 
-    res.redirect('/');
+app.get('/summary/:username', routeGreetings.summaryRoute);
 
-});
-
-app.get('/greeted', async function(req, res) {
-    res.render('greeted', {
-        greetedNames: await greetings.poolGreet()
-
-    });
-});
-
-app.get('/summary/:username', async function(req, res) {
-    const userSelected = req.params.username;
-    const greetedCount = await greetings.poolUserGreeted(userSelected);
-
-    res.render('summary', {
-        userSelected,
-        greetedCount
-
-    });
-});
-
-app.post('/reset', async function(req, res) {
-    await greetings.resetData()
-
-    res.redirect('/');
-
-});
+app.post('/reset', routeGreetings.resetRoute);
 
 let PORT = process.env.PORT || 3010;
 
