@@ -48,7 +48,8 @@ describe('Greetings webapp' , function(){
         it('Should increment the counter once a user has been greeted.' , async function(){
             let greetExercise = greeting(pool);
 
-            await greetExercise.greetMe('lusanDA', 'english');
+            await greetExercise.poolUsername('Lucas', 'english');
+        
 
             assert.equal(1, await greetExercise.poolCounter());
         });
@@ -56,11 +57,11 @@ describe('Greetings webapp' , function(){
         it('Should increment the counter to 5, if 5 users have been greeted.' , async function(){
             let greetExercise = greeting(pool);
 
-            await greetExercise.greetMe('lusanDA', 'english');
-            await greetExercise.greetMe('sipho', 'isixhosa');
-            await greetExercise.greetMe('luKHanyo', 'afrikaans');
-            await greetExercise.greetMe('lEBO', 'afrikaans');
-            await greetExercise.greetMe('luyolO', 'isixhosa');
+            await greetExercise.poolUsername('lusanDA', 'english');
+            await greetExercise.poolUsername('sipho', 'isixhosa');
+            await greetExercise.poolUsername('luKHanyo', 'afrikaans');
+            await greetExercise.poolUsername('lEBO', 'afrikaans');
+            await greetExercise.poolUsername('luyolO', 'isixhosa');
 
             assert.equal(5, await greetExercise.poolCounter());
         });
@@ -68,8 +69,8 @@ describe('Greetings webapp' , function(){
         it("Shouldn't increment the counter once a user has been greeted again." , async function(){
             let greetExercise = greeting(pool);
 
-            await greetExercise.greetMe('lusanDA', 'english');
-            await greetExercise.greetMe('lusANDa', 'isixhosa');
+            await greetExercise.poolUsername('lusanDA', 'english');
+            await greetExercise.poolUsername('lusANDa', 'isixhosa');
 
             assert.equal(1, await greetExercise.poolCounter());
         });
@@ -79,9 +80,9 @@ describe('Greetings webapp' , function(){
         it('Should return the list of names greeted.' , async function(){
             let greetExercise = greeting(pool);
 
-            await greetExercise.greetMe('lusanDA', 'english');
+            await greetExercise.poolUsername('Lilly', 'english');
 
-            assert.deepEqual([{ greet: 1, username: 'Lusanda' }], await greetExercise.poolGreet());
+            assert.deepEqual([{ greet: 1, username: 'Lilly' }], await greetExercise.poolGreet());
 
             
               
@@ -90,9 +91,9 @@ describe('Greetings webapp' , function(){
         it('Should return the list of names greeted.' , async function(){
             let greetExercise = greeting(pool);
 
-            await greetExercise.greetMe('lusanDA', 'english');
-            await greetExercise.greetMe('sipho', 'isixhosa');
-            await greetExercise.greetMe('luKHanyo', 'afrikaans');
+            await greetExercise.poolUsername('lusanDA', 'english');
+            await greetExercise.poolUsername('sipho', 'isixhosa');
+            await greetExercise.poolUsername('luKHanyo', 'afrikaans');
 
             assert.deepEqual([{ greet: 1, username: 'Lukhanyo' }, { greet: 1, username: 'Lusanda' }, { greet: 1, username: 'Sipho' }], await greetExercise.poolGreet());
 

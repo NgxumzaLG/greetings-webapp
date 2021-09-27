@@ -4,15 +4,20 @@ module.exports = function greeting(database) {
     const RegExp = /^[A-Za-z]+$/;
     const pool =  database
 
-    async function poolUsername(poolUser) {
-        const sql = await pool.query (`SELECT * FROM users WHERE username  = $1`, [poolUser]);
+    async function poolUsername(poolUser, poolLang) {
+        let theUser = poolUser.charAt(0).toUpperCase() + poolUser.slice(1).toLowerCase();
+        if (theUser !== "" && poolUser.match(RegExp)) {
+            if (poolLang === "english" || poolLang === "afrikaans" || poolLang === "isixhosa" ) {
+                const sql = await pool.query (`SELECT * FROM users WHERE username  = $1`, [theUser]);
 
-        if (sql.rows.length == 0) {
-            await pool.query(`INSERT INTO users (username, greet) values ($1, $2)`, [poolUser, 1]);
+                if (sql.rows.length == 0) {
+                    await pool.query(`INSERT INTO users (username, greet) values ($1, $2)`, [theUser, 1]);
 
-        } else {
-            await pool.query(`UPDATE users SET greet = greet + 1 WHERE username = $1`, [poolUser]);
+                } else {
+                    await pool.query(`UPDATE users SET greet = greet + 1 WHERE username = $1`, [theUser]);
 
+                }
+            } 
         }
     }
 
@@ -61,7 +66,6 @@ module.exports = function greeting(database) {
                             strMessage = "Molo, " + theName;
                 
                         }
-                        poolUsername(theName)
     
                     } else {
                         strMessage = "Error! language not selected";

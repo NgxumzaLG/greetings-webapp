@@ -12,6 +12,7 @@ module.exports = function (greetings) {
 
     async function actionRoute(req, res) {
         await greetings.greetMe(req.body.userName, req.body.language);
+        await greetings.poolUsername(req.body.userName, req.body.language);
         await greetings.poolCounter();
     
         res.redirect('/');
